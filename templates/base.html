@@ -1,0 +1,130 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>my blog</title>
+    
+    <!-- ربط ملف Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  
+    <style>
+      .nav-item {
+          display: flex;  /* استخدام Flexbox لتوفير محاذاة متساوية */
+          align-items: center;  /* محاذاة عمودية */
+      }
+      .dropdown-toggle {
+          display: flex;  /* استخدام Flexbox لقائمة المنسدلة */
+          align-items: center;  /* محاذاة عمودية */
+      }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/logo.jpg' %}" alt="Logo" style="height: 50px; margin-right: 10px;">
+            Home
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if cats_menu %}
+                <li class="nav-item dropdown">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categories
+                  </a>
+                  <ul class="dropdown-menu">
+                      {% for item in cats_menu %}
+                      <a class="dropdown-item" href="{% url 'ctigories' item %}">{{ item }}</a>
+                      {% endfor %}
+                  </ul>
+                </li>
+              {% endif %}
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add post' %}">Add post</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'add category' %}">Add category</a>
+                </li>
+                <li class="nav-item">
+                    <form method="POST" action="{% url 'logout' %}" style="margin: 0;">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-link btn btn-link">Logout</button>
+                    </form>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+              {% endif %}
+            </ul>
+
+            {% if user.is_authenticated %}
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item d-flex align-items-center ms-3">
+                  {% if user.profile %}
+                    {% if user.profile.profile_pic %}
+                      <a href="{% url 'show_profile' user.profile.id %}">
+                        <img src="{{ user.profile.profile_pic.url }}" class="img-fluid rounded-circle" width="30" height="30" alt="Profile picture">
+                      </a>
+                      <a class="nav-link ms-2" href="{% url 'show_profile' user.profile.id %}">
+                        <strong>{{ user.username }}</strong>
+                      </a>
+                    {% else %}
+                      <a href="{% url 'show_profile' user.profile.id %}">
+                        <img src="{% static 'images/default-profile.jpg' %}" class="img-fluid rounded-circle" width="30" height="30" alt="Default profile picture">
+                      </a>
+                      <a class="nav-link ms-2" href="{% url 'show_profile' user.profile.id %}">
+                        <strong>{{ user.username }}</strong>
+                      </a>
+                    {% endif %}
+                  {% else %}
+                    Hello&nbsp;&nbsp;<strong>{{ user.username }}</strong>
+                    <a class="nav-link ms-2" href="{% url 'create_profile' %}">Complete your profile</a>
+                  {% endif %}
+                </li>
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+
+    {% block content %}
+    {% endblock content %}
+   
+    <!-- Footer HTML Structure -->
+    <footer class="footer-slider">
+      <div class="overlay">
+          <h3>Welcome to our site, Share!</h3>
+          <p>This site is built for us to share our opinions together.</p>
+          <div class="social-icons">
+              <a href="https://wa.me/201014556330" target="_blank">
+                  <i class="fab fa-whatsapp social-icon" style="font-size: 40px;"></i>
+              </a>
+              <a href="https://t.me/@Brandnew" target="_blank">
+                  <i class="fab fa-telegram social-icon" style="font-size: 40px;"></i>
+              </a>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          <p>© 2024 حقوق النشر محفوظة</p>
+      </div>
+  </footer>
+  
+  
+  </body>
+</html>

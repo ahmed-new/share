@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+   {%if user.id == post.author.id %}
+        <h1>EDIT this post...</h1>
+        <li>{{post.date}}</li>
+        <br>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.media }} 
+                {{ form.as_p }} 
+                <button type="submit" class="btn btn-success">Update</button>
+            </form>
+        </div>
+    {%else%}
+        <h1><strong>YOU are logged out , you can sign up or login if you already have an account</strong></h1>
+    {%endif%}
+{%else%}
+<h1><strong>YOU are logged out , you can sign up or login if you already have an account</strong></h1>
+{%endif%}
+{% endblock %}

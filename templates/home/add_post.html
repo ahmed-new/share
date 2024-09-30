@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Add post ...</h1>
+        <div class="form-group">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media}} 
+                {{ form.as_p }} 
+                <button type="submit" class="btn btn-success">Post</button>
+                <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+            </form>
+        </div>
+        <script>
+            var name='{{user.id}}';
+            document.getElementById('ahmed').value 
+            = name;
+
+        </script>
+    {%else%}
+        <h1><strong>YOU are logged out , you can sign up or login if you already have an account</strong></h1>
+    {% endif %}
+{% endblock  %}

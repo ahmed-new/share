@@ -1,0 +1,120 @@
+/* General styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f3;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styling */
+.navbar {
+    background: linear-gradient(90deg, #17a2b8, #138496);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+}
+
+.navbar:hover {
+    background: linear-gradient(90deg, #138496, #17a2b8);
+}
+
+.navbar a.navbar-brand, .navbar a.nav-link {
+    color: #ffffff !important;
+    padding: 15px 20px;
+    transition: color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.navbar a.navbar-brand:hover, .navbar a.nav-link:hover {
+    color: #ffd700 !important; /* Gold color on hover */
+    transform: scale(1.05); /* Slightly scale the link */
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+    background-color: #17a2b8;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-menu a.dropdown-item {
+    color: rgb(124, 13, 13) !important;
+    padding: 10px 15px; /* Padding for better click area */
+}
+
+.dropdown-menu a.dropdown-item:hover {
+    background-color: #138496;
+    transform: scale(1.05); /* Slight scaling effect */
+}
+
+/* Profile picture styles */
+.navbar .img-fluid {
+    border: 3px solid white;
+    border-radius: 50%; /* Circular profile picture */
+    transition: transform 0.3s;
+}
+
+.navbar .img-fluid:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Block content styling */
+.container {
+    margin-top: 20px;
+    padding: 30px;
+    background-color: rgb(139, 46, 46);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.container:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+/* Headings styling */
+h1, h2, h3, h4, h5, h6 {
+    color: #007bff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+/* Footer styling */
+.footer-slider {
+    position: relative;
+    width: 100%;
+    height: 200px; /* ارتفاع الفوتر */
+    
+    background-size: cover; /* لتغطية كامل الفوتر */
+    background-position: center; /* لتوسيع الصورة في المنتصف */
+}
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* لون واضح للنص */
+    text-align: center;
+}
+
+.social-icons {
+    margin-top: 10px; /* مسافة بين النص والأيقونات */
+    font-size: 40px; /* حجم الأيقونة */
+    color: rgb(158, 23, 23); /* لون الأيقونة */
+}
+
+.social-icon {
+    margin: 0 10px; /* مسافة بين الأيقونات */
+    transition: transform 0.3s; /* تأثير انتقال */
+}
+
+.social-icon:hover {
+    transform: scale(1.1); /* تكبير الأيقونة عند المرور عليها */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.5); /* اللون الأسود مع شفافية */
+    color: white; /* لون نص واضح */
+}
+

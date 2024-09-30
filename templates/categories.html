@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if category_posts %}
+    <h1>Category: {{ cats }}</h1>
+    <div class="row">
+        {% for post in category_posts %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'artical_detail' post.pk %}">{{ post.title }}</a>
+                        </h5>
+                        <small>{{ post.date }}</small>
+                        <p class="card-text">{{ post.body|slice:200|safe }}...</p>
+
+                        {% if post.header_img %}
+                            <img src="{{ post.header_img.url }}" alt="photo" class="img-fluid" style="max-height: 150px; object-fit: cover;">
+                        {% endif %}
+
+                        <small>by: {{ post.author }}</small>
+                        {% if user.is_authenticated %}
+                            <div class="mt-2">
+                                <a href="{% url 'update_post' post.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="{% url 'delete_post' post.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <h1>This page does not exist</h1>
+{% endif %}
+{% endblock content %}

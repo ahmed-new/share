@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block content %}
+<h1>{{ user_page }} Profile</h1>
+
+
+
+<div class="border-0 rounded-3">
+    <div class="row g-0">
+        <div class="col-md-2">
+            {% if user_page.profile_pic %}
+                <img src="{{ user_page.profile_pic.url }}" class="img-fluid rounded-circle" width="200" height="200" alt="Profile picture">
+            {% else %}
+                <img src="{% static 'images/default-profile.jpg' %}" class="img-fluid rounded-circle" width="200" height="200" alt="Default profile picture">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+        <div class="card-body">
+        <h5 class="card-title">{{ user_page }}</h5>
+        <p class="card-text">{{ user_page.bio }}</p>
+        <br>
+        {% if user_page.website %}
+            <a href="{{ user_page.profile.website }}">My Website</a>
+        {% endif %}
+        {% if user_page.facebook %}
+            <a href="{{ user_page.profile.facebook }}">Facebook</a>
+        {% endif %}
+        {% if user_page.twitter %}
+          |<a href="{{ user_page.profile.twitter }}">Twitter</a>
+        {% endif %}
+        {% if user_page.instagram %}
+            | <a href="{{ user_page.profile.instagram }}">Instagram</a>
+        {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+
+{% endblock content %}

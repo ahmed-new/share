@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    {%if user.id == post.author.id %}
+        <h1>Delete this post...</h1>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                <h3>{{post.body|safe}}</h3>
+                <br>
+                <br>
+                {% if post.header_img %}
+                    <img src="{{post.header_img.url}}" alt="photo" width="200" height="200">
+                {%endif%}
+                <br>
+                
+                <strong> Are you sure?</strong>
+                <button type="submit" class="btn btn-success">Delete</button>
+            </form>
+            </div>
+    {%else%}
+    <h1><strong>YOU are logged out , you can sign up or login if you already have an account</strong></h1>
+    {%endif%}    
+{%else%}
+    <h1><strong>YOU are logged out , you can sign up or login if you already have an account</strong></h1>
+{%endif%}
+{% endblock %}

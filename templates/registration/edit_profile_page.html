@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.id == profile.user.id %}
+            <h1>Edit profile ...</h1>
+            <div class="form-group">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }} 
+                    <button type="submit" class="btn btn-success">Edit profile</button>
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+                </form>
+        {%else%}  
+            <h1><strong>YOU are NOT ALLOWED TO EDIT THAT PROFILE</strong></h1>
+        {% endif %}      
+       
+    {%else%}
+        <h1><strong>YOU are logged out , you can sign up or login if you already have an account</strong></h1>
+    {% endif %}
+{% endblock  %}
