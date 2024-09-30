@@ -3,6 +3,8 @@ from django .contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime , date
 from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.db.models.signals import post_save
 
 class Category ( models.Model):
     name=models.CharField(max_length=100)
@@ -53,5 +55,12 @@ class Comment (models.Model):
     date_added= models.DateField(auto_now_add=True)
 
 
-def __str__(self):
-    return '%s - %s' % (self.Post.title, self.name)
+    def __str__(self):
+        return '%s - %s' % (self.Post.title, self.name)
+
+def creat_profile(sender ,instance , created , **kwargs):
+    if created :
+        profile_user= Profile.objects.create(user=instance)
+        profile_user.save()
+    
+post_save.connect(creat_profile,sender=User)
